@@ -29,7 +29,7 @@
 (unless package-archive-contents
   (package-refresh-contents))
 
-;; Initialise use-package for easy package installation
+;; Initialise use-package on non-Linux platforms
 (unless (package-installed-p 'use-package)
   (package-install 'use-package))
 
@@ -38,23 +38,4 @@
 
 ;; Improved navigation (e.g. visual autocomplete, fuzzy find) in minibuffer
 (use-package ivy
-  :init (ivy-mode 1))
-
-;; Mode line customisation
-(use-package doom-modeline
-  :init (doom-modeline-mode 1)
-  :custom ((doom-modeline-height 15)))
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages nil))
-
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+  :config (ivy-mode 1))
