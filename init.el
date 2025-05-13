@@ -13,16 +13,19 @@
 ;; Useful visual aids
 (global-display-line-numbers-mode 1)	; Display line numbers
 (global-hl-line-mode 1)			; Highlight the current line
-(blink-cursor-mode 1)			; Blink the cursor (default is 10 blinks before static)
+(blink-cursor-mode 1)			; Blink the cursor (10 blinks then static)
 
-;; Change background colour after 80 characters
-(require 'whitespace)
-(setq whitespce-style '(face lines-tail)) ; Only highlight lines exceeding limit
-(setq whitespace-line-column 80)	  ; Set column limit
-(set-face-attribute 'whitespace-line nil
-		    :background "#2a2a2a" ; Light grey
-		    :foreground nil)	  ; Keep text default colour
-(global-whitespace-mode -1)
+;; Display max character line
+(setq-default fill-column 80)
+(add-hook 'prog-mode-hook #'display-fill-column-indicator-mode)
+(add-hook 'text-mode-hook #'display-fill-column-indicator-mode)
+
+;; ;; Highlight text that goes over max character line
+;; (setq whitespace-style '(face lines-tail))
+;; (add-hook 'prog-mode-hook #'whitespace-mode)
+;; (add-hook 'text-mode-hook #'whitespace-mode)
+;; (custom-set-faces
+;;  '(whitespace-line ((t (:background "#ffc1cc" :foreground "red")))))
 
 ;; Fonts
 (set-face-attribute 'default nil :font "Fira Code Retina" :height 130)
@@ -44,6 +47,11 @@
 
 (require 'use-package)
 (setq use-package-always-ensure t) ; Make sure packages to be used are downloaded
+
+;; Make hex codes the colour they represent
+(use-package rainbow-mode
+  :config
+  (add-hook 'after-change-major-mode-hook #'rainbow-mode))
 
 ;; Improved navigation (e.g. visual autocomplete, fuzzy find) in minibuffer
 (use-package vertico
@@ -94,7 +102,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(consult doom-modeline ivy magit marginalia orderless prescient
+   '(consult doom-modeline ivy magit marginalia orderless prescient rainbow-mode
 	     vertico vertico-prescient)))
 
 (custom-set-faces
