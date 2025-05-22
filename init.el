@@ -81,6 +81,9 @@
 (use-package marginalia
   :init (marginalia-mode 1))
 
+;; Terminal emulator inside Emacs
+(use-package vterm)
+
 ;; Git
 (use-package magit)
 
@@ -95,6 +98,8 @@
 (global-set-key (kbd "C-x b") #'consult-buffer)
 (global-set-key (kbd "M-y") #'consult-yank-pop)
 
+;; LaTeX stuff
+(use-package auctex)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -102,8 +107,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(consult doom-modeline ivy magit marginalia orderless prescient rainbow-mode
-	     vertico vertico-prescient)))
+   '(auctex consult doom-modeline ivy magit marginalia orderless prescient
+	    rainbow-mode vertico vertico-prescient vterm))
+ '(safe-local-variable-values '((TeX-master . t))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
