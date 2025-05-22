@@ -1,6 +1,9 @@
 (setq inhibit-startup-message t		; Don't show the splash screen
       visible-bell nil)			; Flashes to replace beep sound for illegal actions
 
+;; Navigation
+(windmove-default-keybindings)		; Swtich window with SHIFT + ARROWS
+
 ;; General Emacs UI
 (menu-bar-mode -1)			; Show menu bar
 (tool-bar-mode -1)			; Show tool bar

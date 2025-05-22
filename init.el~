@@ -108,7 +108,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    '(auctex consult doom-modeline ivy magit marginalia orderless prescient
-	    rainbow-mode vertico vertico-prescient))
+	    rainbow-mode vertico vertico-prescient vterm))
  '(safe-local-variable-values '((TeX-master . t))))
 
 (custom-set-faces
