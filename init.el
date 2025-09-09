@@ -32,6 +32,8 @@
 
 ;; Fonts
 (set-face-attribute 'default nil :font "Fira Code Retina" :height 130)
+(when (member "Symbols Nerd Font Mono" (font-family-list))
+  (set-fontset-font t 'unicode "Symbols Nerd Font Mono" nil 'prepend))
 
 ;; Initialise package sources
 (require 'package)
@@ -103,16 +105,20 @@
 
 ;; LaTeX stuff
 (use-package auctex)
+(setq TeX-engine 'xetex)
+(setq TeX-PDF-mode t)
+;; Force xelatex to always run on C-c C-c
+(setq TeX-command-force "LaTeX")
+(setq TeX-command-default "LaTeX")
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(auctex consult doom-modeline ivy magit marginalia orderless prescient
-	    rainbow-mode vertico vertico-prescient vterm))
- '(safe-local-variable-values '((TeX-master . t))))
+ '(auth-source-save-behavior nil)
+ '(package-selected-packages nil)
+ '(safe-local-variable-values '((TeX-master . BAIL_2024) (TeX-master . t))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
