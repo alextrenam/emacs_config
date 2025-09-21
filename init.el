@@ -86,6 +86,12 @@
 (use-package marginalia
   :init (marginalia-mode 1))
 
+;; Improved fuzzy searching and file finding
+(use-package consult)
+(global-set-key (kbd "C-s") #'consult-line)
+(global-set-key (kbd "C-x b") #'consult-buffer)
+(global-set-key (kbd "M-y") #'consult-yank-pop)
+
 ;; Terminal emulator inside Emacs
 (use-package vterm)
 
@@ -97,12 +103,6 @@
   :init (doom-modeline-mode 1)
   :custom ((doom-modeline-height 15)))
 
-;; Improved fuzzy searching and file finding
-(use-package consult)
-(global-set-key (kbd "C-s") #'consult-line)
-(global-set-key (kbd "C-x b") #'consult-buffer)
-(global-set-key (kbd "M-y") #'consult-yank-pop)
-
 ;; LaTeX stuff
 (use-package auctex)
 (setq TeX-engine 'xetex)
@@ -110,6 +110,22 @@
 ;; Force xelatex to always run on C-c C-c
 (setq TeX-command-force "LaTeX")
 (setq TeX-command-default "LaTeX")
+
+;; Python LSP server stuff
+(add-hook 'python-mode-hook #'eglot-ensure)
+(with-eval-after-load 'eglot
+  (add-to-list 'eglot-server-programs
+	       '(python-mode .
+			     ;; Pyright for type errors and completions
+			     ("pyright-langserver" "--stdio")
+			     ;; Ruff for style and lint warnings
+			     ("ruff-lsp")
+			     )
+	       )
+  )
+
+;; C++ LSP server stuff
+(add-hook 'c++-mode-hook #'eglot-ensure)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
